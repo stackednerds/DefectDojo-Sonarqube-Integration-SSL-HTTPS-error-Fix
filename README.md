@@ -82,6 +82,7 @@ Update the docker-compose.yml in `/dd/django-DefectDojo` to use the local certif
     environment:
       # ... existing environment variables ...
       REQUESTS_CA_BUNDLE: "/sonarqube-ssl/server.crt"       # To be added
+      DD_EXTRA_SETTINGS: ${DD_EXTRA_SETTINGS_DIR:-/app/docker/extra_settings/disable_ssl_verify.py}   # To be added
     volumes:
         - type: bind
           source: ./docker/extra_settings
@@ -96,6 +97,7 @@ Update the docker-compose.yml in `/dd/django-DefectDojo` to use the local certif
     environment:
       # ... existing environment variables ...
       REQUESTS_CA_BUNDLE: "/sonarqube-ssl/server.crt"        # To be added
+      DD_EXTRA_SETTINGS: ${DD_EXTRA_SETTINGS_DIR:-/app/docker/extra_settings/disable_ssl_verify.py}   # To be added
     volumes:
         - type: bind
           source: ./docker/extra_settings
