@@ -81,28 +81,28 @@ Update the docker-compose.yml in `/dd/django-DefectDojo` to use the local certif
     # ... existing configurations ...
     environment:
       # ... existing environment variables ...
-      REQUESTS_CA_BUNDLE: "/sonarqube-ssl/server.crt"
+      REQUESTS_CA_BUNDLE: "/sonarqube-ssl/server.crt"       # To be added
     volumes:
         - type: bind
           source: ./docker/extra_settings
           target: /app/docker/extra_settings
-        - type: bind
+        - type: bind                 # To be added
           source: ./certs/sonarqube  # Local path to certificates
-          target: /sonarqube-ssl
+          target: /sonarqube-ssl     # To be added
         - "defectdojo_media:${DD_MEDIA_ROOT:-/app/media}"
 
   celeryworker:
     # ... existing configurations ...
     environment:
       # ... existing environment variables ...
-      REQUESTS_CA_BUNDLE: "/sonarqube-ssl/server.crt"
+      REQUESTS_CA_BUNDLE: "/sonarqube-ssl/server.crt"        # To be added
     volumes:
         - type: bind
           source: ./docker/extra_settings
           target: /app/docker/extra_settings
-        - type: bind
+        - type: bind                 # To be added
           source: ./certs/sonarqube  # Local path to certificates
-          target: /sonarqube-ssl
+          target: /sonarqube-ssl     # To be added
         - "defectdojo_media:${DD_MEDIA_ROOT:-/app/media}"
 ```
 
@@ -138,24 +138,3 @@ docker compose exec uwsgi openssl x509 -in /sonarqube-ssl/server.crt -text -noou
    - URL: Your SonarQube URL (https://...)
    - API Key: Your SonarQube token
 
-## Verification Commands
-```bash
-# Verify certificate validity
-openssl verify /dd/django-DefectDojo/certs/sonarqube/server.crt
-
-# Check certificate expiration
-openssl x509 -in /dd/django-DefectDojo/certs/sonarqube/server.crt -noout -dates
-
-# Test SonarQube connectivity
-curl --cacert /dd/django-DefectDojo/certs/sonarqube/server.crt https://your-sonarqube-server
-
-# Check DefectDojo logs
-docker compose logs uwsgi | grep -i "ssl"
-```
-
-## Important Notes
-1. Always use secure methods to transfer certificates.
-2. Ensure proper firewall rules between servers.
-3. Monitor certificate expiration dates.
-
-For further assistance, please refer to the official DefectDojo and SonarQube documentation or contact support.
