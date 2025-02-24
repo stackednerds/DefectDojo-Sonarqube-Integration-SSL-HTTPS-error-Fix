@@ -1,6 +1,6 @@
 # DefectDojo-Sonarqube-Integration-SSL-HTTPS-error-Fix
 
-# DefectDojo-SonarQube SSL Integration Guide
+
 **Created by:** Stacked Nerds  
 **Date:** 2025-02-24 11:21:48 UTC
 
