@@ -1,0 +1,1 @@
+# DefectDojo-Sonarqube-Integration-SSL-HTTPS-error-Fix
